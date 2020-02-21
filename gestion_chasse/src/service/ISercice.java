@@ -5,7 +5,10 @@
  */
 package service;
 
+import entity.Animal;
 import entity.Chasse;
+import entity.Type_animal;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +18,14 @@ import java.util.List;
  */
 public interface ISercice<T> {
 
-    void insert(T t);
+    //void insert(T t);
 
-    void update(Chasse t);
+    void update(int id,String region,Animal animal,Type_animal type,Date date_debut,Date date_fin);
 
-    void delete(String animal);
+    void delete(Animal animal);
 
     List<T> displayAll();
-//    public T triParId(int id);
+// public T triParId(int id);
 
     T recherche(String animal);
 
