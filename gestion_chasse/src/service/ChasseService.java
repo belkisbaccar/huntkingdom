@@ -7,7 +7,7 @@ package service;
 
 import entity.Chasse;
 import huntkingdom.DataSource;
-
+import entity.Type_animal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -24,6 +24,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import java.util.Date;
+import entity.Animal;
 
 import static javax.management.Query.value;
 
@@ -34,40 +35,48 @@ import static javax.management.Query.value;
 public class ChasseService implements ISercice<Chasse> {
 
     private Connection cnx;
-    private Statement st;
+   private Statement st;
     private PreparedStatement pst;
 
     private ResultSet rs;
-
+private static ChasseService instance;
     public ChasseService() {
         cnx = DataSource.getInstance().getCnx();
 
     }
-
-    @Override
-    public void insert(Chasse c) {
-        String req = " insert into chasse (animal,region,saison,date_debut,date_fin) values (' " + c.getAnimal() + "  ','  " + c.getRegion() + "   ', ,'  " + c.getSaison() + "   ',,'  " + c.getDate_debut() + "   ',,'  " + c.getDate_fin() + "   ')";
-
-        try {
-            st = cnx.createStatement();
-            System.out.println(req);
-            st.execute(req);
-        } catch (SQLException ex) {
-            Logger.getLogger(ChasseService.class.getName()).log(Level.SEVERE, null, ex);
+        public static ChasseService getInstance() throws SQLException {
+       
+         if (instance == null) {
+            instance = new ChasseService();
         }
+        return instance;}
 
-    }
+//    @Override
+//    public void insert(Chasse c) {
+//        String req = " insert into chasse (animal,region,saison,date_debut,date_fin) values (' " + c.getAnimal() + "  ','  " + c.getRegion() + "   ', ,'  " + c.getSaison() + "   ',,'  " + c.getDate_debut() + "   ',,'  " + c.getDate_fin() + "   ')";
+//
+//        try {
+//            st = cnx.createStatement();
+//            System.out.println(req);
+//            st.execute(req);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(ChasseService.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//    }
 
     public void insertPST(Chasse c) {
-        String req = "insert into chasse (animal,region,saison,date_debut,date_fin) values (?,?,?,?,?)";
+        String req = "insert into chasse (animal,region,date_debut,date_fin,type,id_user) values (?,?,?,?,?,?)";
         try {
             pst = cnx.prepareStatement(req);
-            pst.setString(1, c.getAnimal());
+            pst.setString(1, c.getAnimal().name());
             pst.setString(2, c.getRegion());
-            pst.setString(3, c.getSaison());
+            //pst.setString(3, c.getSaison());
             //java.util.Date date = new java.util.Date();
-            pst.setDate(4, c.getDate_debut());
-            pst.setDate(5, c.getDate_fin());
+            pst.setDate(3, c.getDate_debut());
+            pst.setDate(4, c.getDate_fin());
+            pst.setString(5, c.getType().name());
+            pst.setInt(6, c.getId_user());
 
             // pst.setTimestamp(4,getCurrentTimeStamp());
             //pst.setDate(5,new java.sql.Date(c.getDate_fin().getT()));
@@ -78,8 +87,8 @@ public class ChasseService implements ISercice<Chasse> {
         }
     }
 
-    public void update(Chasse c) {
-        String sql = "UPDATE chasse SET animal=? , saison=? , region=? ,date_debut=? ,date_fin=?  WHERE id=?";
+    public void update(int id,String region,Animal animal,Type_animal type,Date date_debut,Date date_fin) {
+        String sql = "UPDATE chasse SET animal=?  , region=? ,date_debut=? ,date_fin=?,type=?  WHERE id=?";
 //        int id = 0;
 //        try {
 //            id = pst.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
@@ -95,24 +104,25 @@ public class ChasseService implements ISercice<Chasse> {
             // return true;
             //}
             // System.out.println("Animal Date deb == " +  c.getDate_debut());
-            pst.setString(2, c.getSaison());
-            pst.setString(1, c.getAnimal());
-            pst.setString(3, c.getRegion());
+            //pst.setString(2, c.getSaison());
+            pst.setString(1, animal.name());
+            pst.setString(2, region);
 
-            pst.setDate(4, c.getDate_debut());
-            pst.setDate(5, c.getDate_fin());
-            pst.setInt(6, c.getId());
+            pst.setDate(3, date_debut);
+            pst.setDate(4, date_fin);
+            pst.setInt(6, id);
+            pst.setString(5, type.name());
             //System.out.println(sql);
             pst.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(Chasse.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("id introuvable");
         }
         //return false;
     }
 
     @Override
-    public void delete(String name) {
+    public void delete(Animal name) {
         try {
             String sql = "DELETE FROM chasse WHERE animal = '" + name + "';";
             PreparedStatement pst = cnx.prepareStatement(sql);
@@ -143,8 +153,27 @@ public class ChasseService implements ISercice<Chasse> {
             rs = st.executeQuery(req);
             while (rs.next()) {
                 // list.add(new Chasse(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4));
-                list.add(new Chasse(rs.getInt(1), rs.getString("animal"), rs.getString("saison"), rs.getString("region"), rs.getDate("date_debut"), rs.getDate("date_fin")));
+Chasse c = new Chasse();
+                c.setId(rs.getInt(1));
+                //c.setAnimal(Animal.valueOf(Animal.class, rs.getString("animal")));
+                           //c.setAnimal(rs.getString("animal"));
+           c.setRegion(rs.getString("region"));
+           c.setAnimal(Animal.valueOf(Animal.class, rs.getString("animal")));
+          //c.setSaison(rs.getString("saison"));
+          c.setDate_debut(rs.getDate("date_debut"));
+          c.setDate_fin(rs.getDate("date_fin"));
+          c.setId_user(rs.getInt("id_user"));
+//String type=rs.getString("type");
+//System.out.println(rs.getObject("type", Type_animal.class));
 
+                //System.out.println(type);
+                //c.setType(Type_animal.rs.getString("type"));
+                c.setType(Type_animal.valueOf(Type_animal.class, rs.getString("type")));
+               //c.setType(Type_animal.valueOf(rs.getString("type")));
+               //c.setType(Type_animal.oiseaux);
+               //c.setType((rs.getObject("type", Type_animal.class)));
+               
+              list.add(c);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChasseService.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,12 +195,13 @@ public class ChasseService implements ISercice<Chasse> {
             if (rs.next()) {
                 ch = new Chasse();
                 ch.setId(rs.getInt(1));
-                ch.setAnimal(rs.getString(2));
-                ch.setSaison(rs.getString(4));
+                //ch.setAnimal(rs.getString(2));
+                ch.setAnimal(Animal.valueOf(Animal.class, rs.getString("animal")));
+//                ch.setSaison(rs.getString(4));
                 ch.setRegion(rs.getString(3));
-                ch.setDate_debut(rs.getDate(5));
-                ch.setDate_fin(rs.getDate(6));
-
+                ch.setDate_debut(rs.getDate(4));
+                ch.setDate_fin(rs.getDate(5));
+ ch.setType(Type_animal.valueOf(Type_animal.class, rs.getString("type")));
             } else {
                 throw new SQLException("Animal" + animal + " non trouve");
             }
@@ -215,8 +245,19 @@ public class ChasseService implements ISercice<Chasse> {
             rs = st.executeQuery(req);
 
             while (rs.next()) {
-
-                list.add(new Chasse(rs.getInt(1), rs.getString("animal"), rs.getString("saison"), rs.getString("region"), rs.getDate("date_debut"), rs.getDate("date_fin")));
+                Chasse c = new Chasse();
+                c.setId(rs.getInt(1));
+                c.setAnimal(Animal.valueOf(Animal.class, rs.getString("animal")));
+//                c.setAnimal(rs.getString("animal"));
+                           //c.setAnimal(rs.getString("animal"));
+           c.setRegion(rs.getString("region"));
+          //c.setSaison(rs.getString("saison"));
+          c.setDate_debut(rs.getDate("date_debut"));
+          c.setDate_fin(rs.getDate("date_fin"));
+          c.setId_user(rs.getInt("id_user"));
+ c.setType(Type_animal.valueOf(Type_animal.class, rs.getString("type")));
+ list.add(c);
+                //list.add(new Chasse(rs.getInt(1), rs.getString("animal"), rs.getString("saison"), rs.getString("region"), rs.getDate("date_debut"), rs.getDate("date_fin")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ChasseService.class.getName()).log(Level.SEVERE, null, ex);

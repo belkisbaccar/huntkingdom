@@ -14,31 +14,53 @@ import java.sql.Date;
  */
 public class Chasse {
     private int id;
-    private String animal;
-    private String saison;
+    private Animal animal;
+    //private String saison;
     private String region;
     private Date date_debut;
      private Date date_fin;
+     private Type_animal type;
+     private int id_user;
 
-    public Chasse(int id, String animal, String saison, String region, Date date_debut, Date date_fin) {
+    public Chasse(int id,  Type_animal type ,Animal animal,  String region, Date date_debut, Date date_fin) {
         this.id = id;
         this.animal= animal;
-        this.saison = saison;
+        //this.saison = saison;
         this.region = region;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+        this.type= type;
     }
 
-    public Chasse(String animal, String saison, String region, Date date_debut, Date date_fin) {
+    public Chasse(Animal animal,Type_animal type, String region, Date date_debut, Date date_fin) {
         this.animal = animal;
-        this.saison = saison;
+        //this.saison = saison;
         this.region = region;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
+        this.type= type;
     }
 
     public Chasse() {
         
+    }
+
+    public Chasse(int id, Animal animal, String region, Date date_debut, Date date_fin, Type_animal type, int id_user) {
+        this.id = id;
+        this.animal = animal;
+        this.region = region;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.type = type;
+        this.id_user = id_user;
+    }
+
+    public Chasse(Animal animal, String region, Date date_debut, Date date_fin, Type_animal type) {
+        this.animal = animal;
+        this.region = region;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.type = type;
     }
 
 
@@ -47,13 +69,13 @@ public class Chasse {
         return id;
     }
 
-    public String getAnimal() {
-        return animal;
+    public Animal getAnimal() {
+        return animal;  
     }
 
-    public String getSaison() {
-        return saison;
-    }
+//    public String getSaison() {
+//        return saison;
+//    }
 
     public String getRegion() {
         return region;
@@ -71,13 +93,13 @@ public class Chasse {
         this.id = id;
     }
 
-    public void setAnimal(String animal) {
+    public void setAnimal(Animal animal) {
         this.animal= animal;
     }
 
-    public void setSaison(String saison) {
-        this.saison = saison;
-    }
+//    public void setSaison(String saison) {
+//        this.saison = saison;
+//    }
 
     public void setRegion(String region) {
         this.region = region;
@@ -91,10 +113,34 @@ public class Chasse {
         this.date_fin = date_fin;
     }
 
+    public Type_animal getType() {
+
+        return type;
+    }
+
+    public void setType(Type_animal type) {
+        this.type = type;
+    }
+
+    public int getId_user() {
+        return id_user;
+    }
+
+       public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
     @Override
     public String toString() {
-        return "Chasse{" + "id=" + id + ", animal=" + animal + ", saison=" + saison + ", region=" + region + ", date_debut=" + date_debut + ", date_fin=" + date_fin + '}';
+        return "Chasse{" + "id=" + id + ", animal=" + animal + ", region=" + region + ", date_debut=" + date_debut + ", date_fin=" + date_fin + ", type=" + type + ", id_user=" + id_user + '}';
     }
+
+
+    
+
+  
+
+
     
 
 }
