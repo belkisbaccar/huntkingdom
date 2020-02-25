@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="1268.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="image.FXMLDocumentController">
+   <children>
+      <TableView fx:id="table" layoutX="47.0" layoutY="134.0" prefHeight="454.0" prefWidth="1132.0">
+        <columns>
+          <TableColumn fx:id="columnImage" prefWidth="159.0" />
+          <TableColumn fx:id="columnNom" prefWidth="291.0" text="Produit Disponnible" />
+            <TableColumn fx:id="columnPrix" prefWidth="209.0" text="Prix unitaire" />
+            <TableColumn fx:id="quantite" onEditCommit="#getvalue" prefWidth="205.0" text="Quantite" />
+        </columns>
+      </TableView>
+      <HBox alignment="TOP_RIGHT" layoutX="-1.0" prefHeight="61.0" prefWidth="1268.0">
+         <children>
+            <Label fx:id="nbr_produit" prefHeight="35.0" prefWidth="65.0" textAlignment="RIGHT">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <JFXButton onAction="#commander" prefHeight="62.0" prefWidth="105.0" text=".">
+               <graphic>
+                  <FontAwesomeIcon fill="#d74510" iconName="CART_PLUS" size="5em" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_RIGHT" layoutX="1067.0" layoutY="68.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="44.0" prefWidth="97.0" text="      BUY" textFill="#d74510">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
