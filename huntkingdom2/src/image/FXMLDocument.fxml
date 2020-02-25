@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="1148.0" stylesheets="@../styles/menuStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="image.FXMLDocumentController">
+   <children>
+      <ScrollPane fx:id="scroll" prefHeight="597.0" prefWidth="1150.0">
+         <content>
+            <AnchorPane prefHeight="477.0" prefWidth="1070.0">
+               <children>
+                  <TableView fx:id="table" layoutX="332.0" layoutY="88.0" prefHeight="352.0" prefWidth="784.0" stylesheets="@../styles/styles.css">
+                     <columns>
+                        <TableColumn fx:id="columnImage" prefWidth="159.0" />
+                        <TableColumn fx:id="columnNom" prefWidth="189.0" text="Produit Disponnible" />
+                        <TableColumn fx:id="columnPrix" prefWidth="202.0" text="Prix unitaire" />
+                     </columns>
+                  </TableView>
+                  <JFXHamburger fx:id="hamburger" layoutX="1081.0" layoutY="21.0" prefHeight="38.0" prefWidth="37.0" />
+                  <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" prefHeight="749.0" prefWidth="262.0">
+                     <children>
+                        <VBox fx:id="vbox" alignment="CENTER" prefHeight="709.0" prefWidth="262.0" style="-fx-background-color: #775935;" stylesheets="@../styles/menuStyle.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-border-color: white; -fx-border-width: 0px 0px 2px 0px;">
+                                 <children>
+                                    <ImageView fx:id="imgfront" fitHeight="150.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../styles/88077414_2821248587968965_5027668538941243392_n.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <Button fx:id="menu" mnemonicParsing="false" onAction="#home" prefHeight="66.0" prefWidth="262.0" text="Home" textFill="WHITE" />
+                              <Button fx:id="profile" mnemonicParsing="false" onAction="#page_profile" prefHeight="66.0" prefWidth="262.0" text="Profile" textFill="WHITE" />
+                              <Button fx:id="products" mnemonicParsing="false" onAction="#page_products" prefHeight="66.0" prefWidth="262.0" text="Products" textFill="WHITE" />
+                              <Button fx:id="events" mnemonicParsing="false" onAction="#page_events" prefHeight="66.0" prefWidth="262.0" text="events" textFill="WHITE" />
+                              <Button fx:id="annonce" mnemonicParsing="false" onAction="#page_annonce" prefHeight="66.0" prefWidth="262.0" text="annonce" textFill="WHITE" />
+                              <Button fx:id="complains" mnemonicParsing="false" onAction="#page_complains" prefHeight="66.0" prefWidth="262.0" text="Complains" textFill="WHITE" />
+                              <Button fx:id="hunting" mnemonicParsing="false" onAction="#page_hunting" prefHeight="66.0" prefWidth="262.0" text="hunting" textFill="WHITE" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
+                     </children>
+                  </JFXDrawer>
+                  <HBox alignment="CENTER_LEFT" layoutX="262.0" layoutY="6.0" prefHeight="68.0" prefWidth="685.0">
+                     <children>
+                        <FontAwesomeIcon fill="#d74510" iconName="CART_PLUS" size="5em" />
+                        <Label fx:id="nbr_produit" prefHeight="35.0" prefWidth="65.0" textAlignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXButton onAction="#commander" prefHeight="62.0" prefWidth="105.0" text="." />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="244.0" layoutY="66.0" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="97.0" text="      BUY" textFill="#d74510">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

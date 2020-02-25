@@ -24,7 +24,7 @@ public class Huntkingdom2 extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("/dashboard/FXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/image/FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
