@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import image.panierController;
 import connection.Datasource;
+import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect.Type;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,7 +26,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -42,6 +45,7 @@ import javafx.scene.control.TableColumn.CellEditEvent ;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
+import user.Service.UserSession;
 
 /**
  *
@@ -97,6 +101,7 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         vbox.getStyleClass().add("vbox");
         vbox.setSpacing(5);
               drawer.setSidePane(vbox);
@@ -160,12 +165,16 @@ public class FXMLDocumentController implements Initializable {
                     columnImage.setCellValueFactory(new PropertyValueFactory<>("image"));
                     columnPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
                    
-                    addButtonToTable();
+        try {
+            addButtonToTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
                     addButtonToTable1();
                     table.setItems(data);
     }
 
-    private void addButtonToTable() {
+    private void addButtonToTable() throws SQLException{
          TableColumn actionCol = new TableColumn("ajouter au pannier");
         actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
 
@@ -180,20 +189,18 @@ public class FXMLDocumentController implements Initializable {
                     {
                         btn.setOnAction((ActionEvent event) -> {
                          
+                            Produitentity prod = getTableView().getItems().get(getIndex());
                             try {
-                                Produitentity prod = getTableView().getItems().get(getIndex());
-                               // System.out.println(prod.getQuantite());
-                               
-                                k.insert(4,prod.getNomP());
+                                // System.out.println(prod.getQuantite());
+                                int i = get();
+                                 k.insert(i,prod.getNomP());
+                            calculer(i);
                             } catch (SQLException ex) {
                                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                           
                             
-                            try {
-                                calculer(4);
-                            } catch (SQLException ex) {
-                                Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+
                            
                             
                         });
@@ -223,7 +230,22 @@ public void changenomPCellEvent(CellEditEvent edittedCell)
 Produitentity  prodSelected = table.getSelectionModel().getSelectedItem();
 prodSelected.setNomP(edittedCell.getNewValue().toString());
 }
-
+public int get() throws SQLException
+{int i2=0;
+      UserSession n = UserSession.getInstance();
+                               String s1 = n.getUserName();
+                               Statement stmt1 = cnx.createStatement();
+                              String SQL1 = "SELECT * FROM user  WHERE username ='" +s1+"'";
+                               ResultSet rs1 = stmt1.executeQuery(SQL1);
+                               while(rs1.next())
+                                {
+                                    i2=rs1.getInt(1);
+                                           
+                                }
+        return i2;
+                              
+    
+}
 
     private void getvalue(CellEditEvent<?, ?> event) {
          Object newValue = event.getNewValue();
@@ -265,14 +287,15 @@ prodSelected.setNomP(edittedCell.getNewValue().toString());
                             try {
                                 Produitentity prod = getTableView().getItems().get(getIndex());
                                // System.out.println(prod.getQuantite());
-                               
-                                k.réduire_quantité(4,prod.getNomP());
+                               int i = get();
+                                k.réduire_quantité(i,prod.getNomP());
                             } catch (SQLException ex) {
                                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             
                             try {
-                                calculer(4);
+                                int i = get();
+                                calculer(i);
                             } catch (SQLException ex) {
                                 Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -301,35 +324,66 @@ prodSelected.setNomP(edittedCell.getNewValue().toString());
 
     @FXML
     private void commander(ActionEvent event) throws SQLException {
-        k.commande(4);
-        k.pdf(4);
+       /* int i = get();
+        k.commande(i);
+        k.pdf(i);*/
+        System.out.println("q");
+    }
+
+   @FXML
+    private void home(ActionEvent event) throws IOException {
+                       FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/menu2.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
+        
     }
 
     @FXML
-    private void home(ActionEvent event) {
+    private void page_profile(ActionEvent event) throws IOException {
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/Profile.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
     }
 
     @FXML
-    private void page_profile(ActionEvent event) {
+    private void page_products(ActionEvent event) throws IOException {
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/image/FXMLDocument.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
     }
 
     @FXML
-    private void page_products(ActionEvent event) {
+    private void page_events(ActionEvent event) throws IOException {
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/events.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
     }
 
     @FXML
-    private void page_events(ActionEvent event) {
+    private void page_annonce(ActionEvent event) throws IOException {
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/annonce.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
     }
 
     @FXML
-    private void page_annonce(ActionEvent event) {
+    private void page_complains(ActionEvent event) throws IOException {
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/Complains.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
     }
 
     @FXML
-    private void page_complains(ActionEvent event) {
-    }
-
-    @FXML
-    private void page_hunting(ActionEvent event) {
+    private void page_hunting(ActionEvent event) throws IOException {
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/hunting.fxml"));
+        
+        Parent root=fxml.load();
+        menu.getScene().setRoot(root);
     }
                 }

@@ -21,7 +21,7 @@
    <content>
       <AnchorPane prefHeight="606.0" prefWidth="1153.0">
          <children>
-            <TableView fx:id="table" layoutX="332.0" layoutY="88.0" prefHeight="352.0" prefWidth="784.0" stylesheets="@../styles/styles.css">
+            <TableView fx:id="table" layoutX="289.0" layoutY="176.0" prefHeight="352.0" prefWidth="826.0" stylesheets="@../styles/styles.css">
                <columns>
                   <TableColumn fx:id="columnImage" prefWidth="159.0" />
                   <TableColumn fx:id="columnNom" prefWidth="189.0" text="Produit Disponnible" />

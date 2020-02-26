@@ -78,7 +78,7 @@ public class AnnonceController implements Initializable {
 
        @FXML
     private void home(ActionEvent event) throws IOException {
-                       FXMLLoader fxml=new FXMLLoader(getClass().getResource("menu.fxml"));
+                       FXMLLoader fxml=new FXMLLoader(getClass().getResource("menu2.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -95,7 +95,7 @@ public class AnnonceController implements Initializable {
 
     @FXML
     private void page_products(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Products.fxml"));
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/image/FXMLDocument.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);

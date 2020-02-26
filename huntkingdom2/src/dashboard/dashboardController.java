@@ -20,6 +20,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import user.Service.UserSession;
+
 
 
 /**
@@ -52,6 +54,11 @@ public class dashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       
+        
+        
+        UserSession n = UserSession.getInstance();
+        
         /* makeStageDrageable();
          Media media = new Media("file:///C:/Users/azizm/Desktop/hunt1.mp4");
          MediaPlayer player = new MediaPlayer(media);
@@ -70,6 +77,7 @@ public class dashboardController implements Initializable {
     private void commerce(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/commerceController/produit.fxml"));
          parent.getChildren().setAll(pane);
+      
     }
       private void makeStageDrageable() {
         parent.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -101,7 +109,9 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void complaints(ActionEvent event) {
+    private void complaints(ActionEvent event) throws IOException {
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("/GUIR/gestion_reclamation_admin.fxml"));
+         parent.getChildren().setAll(pane);
     }
 
     @FXML
@@ -109,7 +119,9 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void events(ActionEvent event) {
+    private void events(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/GUIE/Addevenement.fxml"));
+         parent.getChildren().setAll(pane);
     }
 
     @FXML

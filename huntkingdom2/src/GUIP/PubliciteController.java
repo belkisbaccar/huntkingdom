@@ -11,6 +11,9 @@ import publicite.Entity.PubliciteAimer;
 import publicite.Service.ServicePromotion;
 import publicite.Service.ServicePublicite;
 import publicite.Service.ServicePubliciteAimer;
+import javax.mail.*;  
+import javax.mail.internet.*;  
+import javax.activation.*;  
 import connection.Datasource;
  import javafx.application.Application;
  import javafx.geometry.Rectangle2D;
@@ -33,6 +36,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,6 +74,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import user.Service.UserSession;
 
 /**
  * FXML Controller class
@@ -187,7 +192,10 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     try {
+    UserSession n = UserSession.getInstance();
+    
+        System.out.println(n);
+        try {
          start1();
      } catch (Exception ex) {
          Logger.getLogger(PubliciteController.class.getName()).log(Level.SEVERE, null, ex);
@@ -461,8 +469,7 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
        
         else 
             error_image.setText("choisir image");
-        if(cc.getImage().length()!=0)
-            error_image.setText("");
+       
             
         
     }
@@ -492,6 +499,8 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
           {ps.ajouter(new Publicite(nomP.getText(),cc.getImage(), d1,d2,nom_P.getText(),s));}
           ps.ajouter(new Publicite(nomP.getText(),imgG, d1,d2,nom_P.getText(),s));
         displayAll_pub();
+        EmailService mail= new  EmailService("smtp.mailtrap.io", 25, "walid171798@gmail.com", "azerty&psn1234");
+        mail.sendMail();
         JOptionPane.showMessageDialog(null, "Ajout effectué");
         nomP.clear();
         imageviw1.setImage(null);
