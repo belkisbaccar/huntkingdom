@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
@@ -55,7 +56,7 @@ public class dashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
-        
+         
         
         UserSession n = UserSession.getInstance();
         
@@ -105,7 +106,9 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void user(ActionEvent event) {
+    private void user(ActionEvent event) throws IOException {
+              AnchorPane pane = FXMLLoader.load(getClass().getResource("/GUIProfile/back_admin.fxml"));
+         parent.getChildren().setAll(pane);
     }
 
     @FXML
@@ -115,7 +118,13 @@ public class dashboardController implements Initializable {
     }
 
     @FXML
-    private void hunt(ActionEvent event) {
+    private void hunt(ActionEvent event) throws IOException {
+         AnchorPane pane = FXMLLoader.load(getClass().getResource("/GUIC/Gestionchasse.fxml"));
+      parent.getChildren().setAll(pane);
+//              FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIC/Gestionchasse.fxml"));
+//        
+//        Parent root=fxml.load();
+//        parent.getScene().setRoot(root);
     }
 
     @FXML
@@ -127,6 +136,7 @@ public class dashboardController implements Initializable {
     @FXML
     private void publicity(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/GUIP/Publicite.fxml"));
+        
          parent.getChildren().setAll(pane);
     }
     

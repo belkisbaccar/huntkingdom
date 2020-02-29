@@ -119,7 +119,7 @@ public class AnnonceController implements Initializable {
 
     @FXML
     private void page_complains(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Complains.fxml"));
+                               FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIR/afficher_complaint.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);

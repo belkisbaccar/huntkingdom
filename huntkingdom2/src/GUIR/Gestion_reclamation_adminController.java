@@ -90,6 +90,10 @@ public class Gestion_reclamation_adminController implements Initializable {
     private NumberAxis Y;
     @FXML
     private CategoryAxis X;
+    @FXML
+    private Button retour1;
+    @FXML
+    private Button retour;
 
    
     /**
@@ -111,9 +115,15 @@ public class Gestion_reclamation_adminController implements Initializable {
 //            System.out.println("traitée"+service.stats_traite());
             
             XYChart.Series series = new XYChart.Series();
-            series.getData().add(new XYChart.Data("Non traitée",service.stats_non_traite()));
-            series.getData().add(new XYChart.Data("En cours",service.stats_en_cours()));
-            series.getData().add(new XYChart.Data("Traitée",service.stats_traite()));
+//            series.getData().add(new XYChart.Data("Non traitée",service.stats_non_traite()));
+//            series.getData().add(new XYChart.Data("En cours",service.stats_en_cours()));
+//            series.getData().add(new XYChart.Data("Traitée",service.stats_traite()));
+            series.getData().add(new XYChart.Data("note = 0",service.stats_0()));
+            series.getData().add(new XYChart.Data("note = 1",service.stats_1()));
+            series.getData().add(new XYChart.Data("note = 2",service.stats_2()));
+            series.getData().add(new XYChart.Data("note = 3",service.stats_3()));
+            series.getData().add(new XYChart.Data("note = 4",service.stats_4()));
+            series.getData().add(new XYChart.Data("note = 5",service.stats_5()));
 
             linechart.getData().addAll(series);
         } catch (SQLException ex) {
@@ -263,7 +273,7 @@ public class Gestion_reclamation_adminController implements Initializable {
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
 
-                if (String.valueOf(myObject.getEtat()).toLowerCase().contains(lowerCaseFilter)) {
+                if (String.valueOf(myObject.getEtat()).toLowerCase().contains(lowerCaseFilter) || String.valueOf(myObject.getU().getId_user()).toLowerCase().contains(lowerCaseFilter)   ||  String.valueOf(myObject.getA().getId_annonce()).toLowerCase().contains(lowerCaseFilter)   || String.valueOf(myObject.getNote()).toLowerCase().contains(lowerCaseFilter)   || String.valueOf(myObject.getDescription()).toLowerCase().contains(lowerCaseFilter)) {
                     return true;
 
                 }
@@ -273,5 +283,13 @@ public class Gestion_reclamation_adminController implements Initializable {
         SortedList<Complaints> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(table_id.comparatorProperty());
         table_id.setItems(sortedData);
+    }
+
+    @FXML
+    private void retour1(ActionEvent event) {
+    }
+
+    @FXML
+    private void retour(ActionEvent event) {
     }
 }

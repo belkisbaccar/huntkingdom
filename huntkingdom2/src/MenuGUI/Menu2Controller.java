@@ -15,6 +15,7 @@ import publicite.Entity.PubliciteAimer;
 import publicite.Service.ServicePublicite;
 import publicite.Service.ServicePubliciteAimer;
 import connection.Datasource;
+import image.panierController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -48,6 +49,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import javax.activation.DataSource;
+import user.Service.UserSession;
 
 /**
  * FXML Controller class
@@ -91,7 +93,8 @@ List<String> type;
     String imgG="";
     int verif=0;
     Publicite cc=null;
-    Promotion promo=null;
+    Promotion promo=null;  
+    int user_connectee=0;
       private final double IMG_WIDTH = 1125;
     private final double IMG_HEIGHT = 135;
  
@@ -106,6 +109,7 @@ List<String> type;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            user_connectee=get();
             // imgfront.setImage(new Image("l.png"));
             start1();
         } catch (Exception ex) {
@@ -142,7 +146,7 @@ List<String> type;
 
     @FXML
     private void page_profile(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Profile.fxml"));
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIProfile/Welcome.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -174,7 +178,7 @@ List<String> type;
 
     @FXML
     private void page_complains(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Complains.fxml"));
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIR/afficher_complaint.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -189,7 +193,7 @@ List<String> type;
     }
              public void start1() throws Exception {
           
-   
+  
         
        ServicePubliciteAimer pa=new ServicePubliciteAimer();
         String req="select * from publicite  ";
@@ -207,10 +211,10 @@ List<String> type;
         v.setFitHeight(129);
         v.setFitWidth(1125);
               Button bt1=new Button("like");
-                System.out.println(pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),3, d2)));
+                
                       
                       
-          if (pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),3, d2))) {
+          if (pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),user_connectee, d2))) {
                    bt1.setDisable(true);
               }
 
@@ -225,9 +229,9 @@ List<String> type;
         
         System.out.println(p.getId_publicite());
         try {
-            if(!pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),3, d2)))
+            if(!pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),user_connectee, d2)))
             {
-                pa.ajouter(new PubliciteAimer(p.getId_publicite(),3,new Date()));
+                pa.ajouter(new PubliciteAimer(p.getId_publicite(),user_connectee,new Date()));
                 bt1.setDisable(true);
             }
             
@@ -282,4 +286,21 @@ List<String> type;
         anim.setCycleCount(Timeline.INDEFINITE);
         anim.playFromStart();
     } 
+           public int get() throws SQLException
+{
+    int i2=0;
+      UserSession n = UserSession.getInstance();
+                               String s1 = n.getUserName();
+                               Statement stmt1 = con.createStatement();
+                              String SQL1 = "SELECT * FROM user  WHERE username ='" +s1+"'";
+                               ResultSet rs1 = stmt1.executeQuery(SQL1);
+                               while(rs1.next())
+                                {
+                                    i2=rs1.getInt(1);
+                                           
+                                }
+        return i2;
+                              
+    
+}
 }

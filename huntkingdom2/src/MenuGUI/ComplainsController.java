@@ -87,7 +87,7 @@ public class ComplainsController implements Initializable {
 
     @FXML
     private void page_profile(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Profile.fxml"));
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIProfile/Welcome.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -119,7 +119,7 @@ public class ComplainsController implements Initializable {
 
     @FXML
     private void page_complains(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Complains.fxml"));
+                                FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIR/afficher_complaint.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);

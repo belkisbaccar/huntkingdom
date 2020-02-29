@@ -9,11 +9,50 @@ package user.Entity;
  *
  * @author LENOVO
  */
-public class commentaire {
+public class commentaire { 
     private int id_commentaire;
       private user user_id;
       private Annonce id_annonce;
-      private String comentaire;  
+      private String comentaire;   
+      private String a;
+
+    public commentaire(int id_commentaire) {
+        this.id_commentaire = id_commentaire;
+    }
+
+    
+
+    
+
+   
+    public void setA(String a) {
+        this.a = a;
+    }
+
+    public String getA() {
+        return a;
+    }
+
+    public commentaire(user user_id, Annonce id_annonce, String comentaire) {
+        this.user_id = user_id;
+        this.id_annonce = id_annonce;
+        this.comentaire = comentaire;
+    }
+
+    public commentaire(int id_commentaire, String comentaire, String a) {
+        this.id_commentaire = id_commentaire;
+        this.comentaire = comentaire;
+        this.a = a;
+    }
+
+    public commentaire(int id_commentaire, user user_id, Annonce id_annonce, String comentaire, String a) {
+        this.id_commentaire = id_commentaire;
+        this.user_id = user_id;
+        this.id_annonce = id_annonce;
+        this.comentaire = comentaire;
+        this.a = a;
+    }
+    
 
     public commentaire(int id_commentaire, user user_id, Annonce id_annonce, String comentaire) {
         this.id_commentaire = id_commentaire;

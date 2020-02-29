@@ -12,12 +12,52 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/huntkingdom/huntkingdom2/src/publicite/Service/ServicePubliciteAimer.java</file>
-            <file>file:/D:/huntkingdom/huntkingdom2/src/evenement/Service/participationService.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Back_adminController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/publicite/Service/ServicePromotion.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/MenuGUI/AnnonceController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/styles/style1.css</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Gestion_userController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Entity/Produitentity.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Ajout_comController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/image/panierController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Entity/Type_animal.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Entity/Animal.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/user/Service/ServiceUser.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Modifier_compteController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Service/ChasseService.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIC/Gestionchasse.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIC/AjouterchasseController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Service/ISercice.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/image/panier.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/StatController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Entity/Animalproduit.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/AannController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/back_admin.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/dashboard/dashboardController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/commerceController/ProduitController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/aann.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Demande_adminController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Entity/user.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Ajouter_annonceController.java</file>
             <file>file:/D:/huntkingdom/huntkingdom2/src/huntkingdom2/Huntkingdom2.java</file>
-            <file>file:/D:/huntkingdom/huntkingdom2/src/evenement/Entity/participation.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIR/Afficher_complaintController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/MenuGUI/ComplainsController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/modifier_compte.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Service/ProduitController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/WelcomeController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/image/Produitentity.java</file>
             <file>file:/D:/huntkingdom/huntkingdom2/src/MenuGUI/Menu2Controller.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Service/ProduitService.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/comment.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Demande_admin.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/user/Service/ServiceDemande.java</file>
             <file>file:/D:/huntkingdom/huntkingdom2/src/MenuGUI/EventsController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/chasse/Entity/Chasse.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/Gestion_user.fxml</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/image/FXMLDocumentController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUILogin/Sign_inController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/CommentController.java</file>
+            <file>file:/D:/huntkingdom/huntkingdom2/src/GUIProfile/stat.fxml</file>
         </group>
     </open-files>
 </project-private>

@@ -6,11 +6,13 @@
 package GUIP;
 
 import publicite.Entity.Promotion;
+import reclamation.API.Mail;
 import publicite.Entity.Publicite;
 import publicite.Entity.PubliciteAimer;
 import publicite.Service.ServicePromotion;
 import publicite.Service.ServicePublicite;
 import publicite.Service.ServicePubliciteAimer;
+import com.teknikindustries.bulksms.SMS;
 import javax.mail.*;  
 import javax.mail.internet.*;  
 import javax.activation.*;  
@@ -58,6 +60,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -84,7 +87,9 @@ import user.Service.UserSession;
 public class PubliciteController implements Initializable {
  private Connection con;
     @FXML
-    private Button close;
+    private PieChart piechart;
+    @FXML
+    private Label caption;
     public PubliciteController() {
        con = Datasource.getInstance().getCnx();
     }
@@ -185,24 +190,41 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
     private Label error_date_f;
     @FXML
     private Label error_nom_p;
-    @FXML
-    private HBox imgslider;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     UserSession n = UserSession.getInstance();
-    
-        System.out.println(n);
-        try {
-         start1();
-     } catch (Exception ex) {
-         Logger.getLogger(PubliciteController.class.getName()).log(Level.SEVERE, null, ex);
-     }
+   
+   
         
         try {
-            
+                 Statement stmt1 = con.createStatement();
+        ObservableList<PieChart.Data>pieData = FXCollections.observableArrayList();
+                              String SQL1 = "SELECT publicite.nom, COUNT(DISTINCT publicite_aimer.id_user) AS \"NB_like\", publicite.prix FROM publicite_aimer INNER JOIN publicite ON publicite_aimer.id_publicite = publicite.id_publicite GROUP BY publicite_aimer.id_publicite";
+                               ResultSet rs1 = stmt1.executeQuery(SQL1);
+                               while(rs1.next())
+                                {
+                                   pieData.add(new PieChart.Data("NOM pub : "+rs1.getString(1)+"\n"+"Prix pub : "+rs1.getString(3),rs1.getDouble(2)));
+                                           
+                                }
+       
+       piechart.setData(pieData);
+                        
+caption.setTextFill(Color.DARKORANGE);
+caption.setStyle("-fx-font: 24 arial;");
+
+for (final PieChart.Data data : piechart.getData()) {
+    data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+        new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                int i = (int) data.getPieValue();
+                caption.setText(String.valueOf("Nb_like : "+i));
+             }
+        });
+}
+
             type=new ArrayList<>();
             type.add("*.jpg");
             type.add("*.png");
@@ -475,7 +497,7 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
     }
 
     @FXML
-    private void ajouter(ActionEvent event) throws SQLException {
+    private void ajouter(ActionEvent event) throws SQLException, Exception {
         
         if(nomP.getText().isEmpty() ||(imgG.isEmpty()&&cc.getImage().isEmpty()) || date_d.getValue()==null ||date_f.getValue()==null||nom_P.getText().isEmpty()||prix_P.getText().isEmpty() )
         
@@ -502,6 +524,7 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
         EmailService mail= new  EmailService("smtp.mailtrap.io", 25, "walid171798@gmail.com", "azerty&psn1234");
         mail.sendMail();
         JOptionPane.showMessageDialog(null, "Ajout effectué");
+        Mail.sendMail("belkisbaccar29@gmail.com");
         nomP.clear();
         imageviw1.setImage(null);
         date_d.setValue(null);
@@ -623,6 +646,8 @@ ObservableList <Publicite> data =FXCollections.observableArrayList();
         Double t=Double.parseDouble(taux.getValue());
         int id=Integer.parseInt(id_produit.getValue());
         pss.ajouter(new Promotion(id,t, d1, d2));
+//                SMS s=new SMS();
+//                s.SendSMS("walid17","Azerty&psn123","Nouvelle promo est ajouter!!! vister notre application","+216 23831858","https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
         displayAll_promo();
   id_produit.getItems().clear();      
 List ids=pss.readAll_ID_produit();
@@ -770,106 +795,7 @@ List ids=pss.readAll_ID_produit();
         sortedData.comparatorProperty().bind(tab_pub.comparatorProperty());
         tab_pub.setItems(sortedData);
     }
-      public void start1() throws Exception {
-          
-   
-        
-       ServicePubliciteAimer pa=new ServicePubliciteAimer();
-        String req="select * from publicite  ";
-        List<VBox> list = new ArrayList<>();
-        
-        try {
-            ste=con.createStatement();
-            ResultSet rs = ste.executeQuery(req);
-            while(rs.next()){
-                java.util.Date d1 = new java.util.Date(rs.getDate(4).getTime());
-               java.util.Date d2 = new java.util.Date(rs.getDate(5).getTime());
-                Publicite p= new Publicite(rs.getInt(1),rs.getString(2),rs.getString(3),d1, rs.getString(6), d2,rs.getDouble(7));
-              ImageView v=new ImageView(new Image(rs.getString(3)));
-                 
-        v.setFitHeight(300);
-        v.setFitWidth(1278);
-              Button bt1=new Button("like");
-                System.out.println(pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),3, d2)));
-                      
-                      
-          if (pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),3, d2))) {
-                   bt1.setDisable(true);
-              }
 
-               VBox v1=new VBox();
-               v1.setAlignment(Pos.CENTER);
-               v1.setSpacing(10);
-               v1.getChildren().addAll(v,bt1);
-               list.add(v1);
-               NUM_OF_IMGS=list.size();
-               bt1.setOnAction(new EventHandler<ActionEvent>() {
-    @Override public void handle(ActionEvent e) {
-        
-        System.out.println(p.getId_publicite());
-        try {
-            if(!pa.chercher_ajout(new PubliciteAimer(p.getId_publicite(),3, d2)))
-            {
-                pa.ajouter(new PubliciteAimer(p.getId_publicite(),3,new Date()));
-                bt1.setDisable(true);
-            }
-            
-           else System.out.println("PUB DEJA AIMER");
-        } catch (SQLException ex) {
-            Logger.getLogger(PubliciteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ServicePublicite.class.getName()).log(Level.SEVERE, null, ex);
-        }
- 
-        
-       
-        imgslider.getChildren().addAll(list);
-        
-     
-        startAnimation(imgslider);
-       
-      }
-       private void startAnimation(final HBox hbox) {
-        //error occured on (ActionEvent t) line
-        //slide action
-        EventHandler<ActionEvent> slideAction = (ActionEvent t) -> {
-            TranslateTransition trans = new TranslateTransition(Duration.seconds(1.5), hbox);
-            trans.setByX(-IMG_WIDTH);
-            trans.setInterpolator(Interpolator.EASE_BOTH);
-            trans.play();
-        };
-        //eventHandler
-        EventHandler<ActionEvent> resetAction = (ActionEvent t) -> {
-            TranslateTransition trans = new TranslateTransition(Duration.seconds(1), hbox);
-            trans.setByX((NUM_OF_IMGS - 1) * IMG_WIDTH);
-            trans.setInterpolator(Interpolator.EASE_BOTH);
-            trans.play();
-        };
- 
-        List<KeyFrame> keyFrames = new ArrayList<>();
-        for (int i = 1; i <= NUM_OF_IMGS; i++) {
-            if (i == NUM_OF_IMGS) {
-                keyFrames.add(new KeyFrame(Duration.seconds(i * SLIDE_FREQ), resetAction));
-            } else {
-                keyFrames.add(new KeyFrame(Duration.seconds(i * SLIDE_FREQ), slideAction));
-            }
-        }
-//add timeLine
-        Timeline anim = new Timeline(keyFrames.toArray(new KeyFrame[NUM_OF_IMGS]));
- 
-        anim.setCycleCount(Timeline.INDEFINITE);
-        anim.playFromStart();
-    }
 
-    @FXML
-    private void close(ActionEvent event) {
-        imgslider.setVisible(false);
-        close.setVisible(false);
-       
-    }
+
 }

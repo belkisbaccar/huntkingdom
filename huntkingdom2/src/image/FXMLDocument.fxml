@@ -58,13 +58,15 @@
             </JFXDrawer>
             <HBox alignment="CENTER_LEFT" layoutX="262.0" layoutY="6.0" prefHeight="68.0" prefWidth="685.0">
                <children>
-                  <FontAwesomeIcon fill="#d74510" iconName="CART_PLUS" size="5em" />
+                  <JFXButton onAction="#commander" prefHeight="62.0" prefWidth="105.0" text=".">
+                     <graphic>
+                        <FontAwesomeIcon fill="#d74510" iconName="CART_PLUS" size="5em" />
+                     </graphic></JFXButton>
                   <Label fx:id="nbr_produit" prefHeight="35.0" prefWidth="65.0" textAlignment="RIGHT">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Label>
-                  <JFXButton onAction="#commander" prefHeight="62.0" prefWidth="105.0" text="." />
                </children>
             </HBox>
             <HBox layoutX="244.0" layoutY="66.0" prefHeight="100.0" prefWidth="200.0">

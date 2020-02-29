@@ -446,5 +446,138 @@ public class ServiceComplaint implements reclamation.Iservice.IServise<Complaint
          }System.out.println("list "+list_c);
          return nb_traite;
      }
+     
+     
+         public List<Complaints> readAll_id2( user us) throws SQLException {
+        List<Complaints> arr=new ArrayList<>();
+    ste=con.createStatement();
+    ResultSet rs=ste.executeQuery("select * from reclamation  where id_user  ='"+us.getId_user()+"'");
+     while (rs.next()) {                
+               int id=rs.getInt(1);
+               String etat=rs.getString(2);
+               String description=rs.getString(3);
+               String image=rs.getString(4);
+               int note=rs.getInt(5);
+               
+               ServiceAnnonce annonce_ser= new ServiceAnnonce();
+               int annonce_id = rs.getInt(6);
+               Annonce a = annonce_ser.getannonce_id(annonce_id);
+               ServiceUser user_ser= new ServiceUser();
+               int user_id = rs.getInt(7);
+               user u =user_ser.getuser_id(user_id);
+               Date date=rs.getDate(8);
+              ImageView v=new ImageView();
+              v.setImage(new Image(rs.getString(4)));
+              v.setFitHeight(100);
+              v.setFitWidth(100);
+              int prod_id = rs.getInt(9);
+              ServiceProduit ser_prod = new ServiceProduit();
+              Produitentity pr = ser_prod.getprod_id(prod_id);
+              //System.out.println("id proooooooooood "+prod_id);
+               Complaints p1=new Complaints(id,etat, description, image, note, a, u, date,pr);
+               p1.setJ(v);
+               if(p1.getA().getId_annonce()>0){
+            p1.setSujet("annonce");
+               p1.setId_obj(annonce_id);
+                   System.out.println("annonce");
+               }
+               else if(p1.getP().getId()>0){
+             p1.setSujet("produit");
+                       p1.setId_obj(prod_id);
+                       System.out.println("produit");
+         }
+               
+     arr.add(p1);
+     }
+    return arr;
+    }
+    
+         
+         
+         
+         
+         public int stats_0()throws SQLException {
+         List<Complaints> list_c=new ArrayList<>();
+         
+         int nb0=0;
+         list_c = readAll();
+         //System.out.println("list c "+list_c);
+         for(Complaints c:list_c){
+          
+             if(c.getNote()==0)
+                 nb0 ++;
+         }System.out.println("list "+list_c);
+         return nb0;
+     }
+         
+          public int stats_1()throws SQLException {
+         List<Complaints> list_c=new ArrayList<>();
+         
+         int nb1=0;
+         list_c = readAll();
+         //System.out.println("list c "+list_c);
+         for(Complaints c:list_c){
+          
+             if(c.getNote()==1)
+                 nb1 ++;
+         }System.out.println("list "+list_c);
+         return nb1;
+     }
+          
+           public int stats_2()throws SQLException {
+         List<Complaints> list_c=new ArrayList<>();
+         
+         int nb2=0;
+         list_c = readAll();
+         //System.out.println("list c "+list_c);
+         for(Complaints c:list_c){
+          
+             if(c.getNote()==2)
+                 nb2 ++;
+         }System.out.println("list "+list_c);
+         return nb2;
+     }
+           
+            public int stats_3()throws SQLException {
+         List<Complaints> list_c=new ArrayList<>();
+         
+         int nb3=0;
+         list_c = readAll();
+         //System.out.println("list c "+list_c);
+         for(Complaints c:list_c){
+          
+             if(c.getNote()==3)
+                 nb3 ++;
+         }System.out.println("list "+list_c);
+         return nb3;
+     }
+            
+             public int stats_4()throws SQLException {
+         List<Complaints> list_c=new ArrayList<>();
+         
+         int nb4=0;
+         list_c = readAll();
+         //System.out.println("list c "+list_c);
+         for(Complaints c:list_c){
+          
+             if(c.getNote()==4)
+                 nb4 ++;
+         }System.out.println("list "+list_c);
+         return nb4;
+     }
+              public int stats_5()throws SQLException {
+         List<Complaints> list_c=new ArrayList<>();
+         
+         int nb5=0;
+         list_c = readAll();
+         //System.out.println("list c "+list_c);
+         for(Complaints c:list_c){
+          
+             if(c.getNote()==5)
+                 nb5 ++;
+         }System.out.println("list "+list_c);
+         return nb5;
+     }
+
 }
 

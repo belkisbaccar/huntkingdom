@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="parent" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIProfile.Ajout_comController">
+   <children>
+      <TextField fx:id="comenti" layoutX="78.0" layoutY="52.0" prefHeight="76.0" prefWidth="241.0" promptText="ecrivez votre commentaire..." />
+      <Button fx:id="ajout_c" layoutX="325.0" layoutY="169.0" mnemonicParsing="false" onAction="#ajout" text="Commentez" />
+      <Text fx:id="kk" layoutX="3.0" layoutY="-4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+   </children>
+</AnchorPane>

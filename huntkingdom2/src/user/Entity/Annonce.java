@@ -48,7 +48,6 @@ public class Annonce {
         this.image = image;
          this.a = a;
         this.aime = aime;
-       
         this.img = img;
     }
 
@@ -149,6 +148,10 @@ public class Annonce {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Annonce(int id_annonce) {
+        this.id_annonce = id_annonce;
     }
 
     public void setImage(String image) {

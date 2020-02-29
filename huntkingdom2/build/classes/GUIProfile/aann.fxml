@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="parent1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1264.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIProfile.AannController">
+   <children>
+      <TextField fx:id="nom" layoutX="603.0" layoutY="26.0" prefHeight="48.0" prefWidth="374.0" style="-fx-background-color: transparent;">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </TextField>
+      <Text layoutX="452.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="imageview" fitHeight="114.0" fitWidth="152.0" layoutX="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <Glow />
+         </effect>
+      </ImageView>
+      <Button fx:id="sign_out" layoutX="1104.0" layoutY="16.0" mnemonicParsing="false" onAction="#sign_out" text="Sign_out" />
+      <Button fx:id="annonce" layoutX="992.0" layoutY="666.0" mnemonicParsing="false" onAction="#annonce" prefHeight="31.0" prefWidth="166.0" text="ajouter Annonce" />
+      <Button fx:id="modifierr" layoutX="992.0" layoutY="618.0" mnemonicParsing="false" onAction="#modifierr" prefHeight="31.0" prefWidth="175.0" text="Modifier Annonce" />
+      <Button fx:id="supprimerr" layoutX="992.0" layoutY="715.0" mnemonicParsing="false" onAction="#supprimerr" prefHeight="31.0" prefWidth="175.0" text="Supprimer Annonce" />
+      <Button fx:id="ai" layoutX="787.0" layoutY="305.0" mnemonicParsing="false" onMouseClicked="#addlike" prefHeight="35.0" prefWidth="98.0" />
+      <ImageView fx:id="im" fitHeight="150.0" fitWidth="166.0" layoutX="549.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="uuu" layoutX="352.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="175.13671875">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="232.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ecrit par:   " wrappingWidth="152.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="p" layoutX="764.0" layoutY="266.0" mnemonicParsing="false" onAction="#import_image" prefHeight="25.0" prefWidth="144.0" text="Importer_image" />
+      <TextField fx:id="ann" layoutX="99.0" layoutY="238.0" prefHeight="150.0" prefWidth="435.0" promptText="Annonce........">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <Text fx:id="cxx" fill="#bc5555" layoutX="809.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Like" textAlignment="CENTER" wrappingWidth="53.794921875">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TextField fx:id="neer" layoutX="-7.0" layoutY="-25.0" prefHeight="8.0" prefWidth="14.0" />
+      <TableView fx:id="table" layoutX="232.0" layoutY="542.0" prefHeight="264.0" prefWidth="621.0">
+         <columns>
+            <TableColumn fx:id="idd" prefWidth="145.0" text="Num_Annonce" />
+            <TableColumn fx:id="textt" prefWidth="101.0" text="Annonce" />
+            <TableColumn fx:id="photoo" prefWidth="141.0" text="Photo" />
+            <TableColumn fx:id="Userr" prefWidth="83.0" text="User" />
+            <TableColumn fx:id="aimee" prefWidth="145.0" text="nombre de j'aime" />
+         </columns>
+      </TableView>
+      <Button fx:id="returnnnnn" layoutX="977.0" layoutY="16.0" mnemonicParsing="false" onAction="#returnnn" text="retour" />
+   </children>
+</AnchorPane>

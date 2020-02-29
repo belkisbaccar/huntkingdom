@@ -37,13 +37,8 @@ public class ServiceCommentaire implements IServise<commentaire>{
         PreparedStatement pre=con.prepareStatement("INSERT INTO commentaire ( `id_user`, `id_annonce`, `commentaire`) VALUES ( ?, ?, ?);");
        ServiceUser user_ser= new ServiceUser();
         pre.setInt(1,user_ser.getuser(t.getUser_id()).getId_user());
-       
-        
         ServiceAnnonce annonce_ser = new ServiceAnnonce();
         pre.setInt(2, annonce_ser.getAnnonce(t.getId_annonce()).getId_annonce());
-      
-        
-        
         //System.out.println( t.getU());
         pre.setString(3, t.getComentaire());
         pre.executeUpdate();    
@@ -68,7 +63,7 @@ public class ServiceCommentaire implements IServise<commentaire>{
 //        pre.setString(3, t.getImage());
 //        pre.setInt(4, t.getNote());
 //        pre.setString(5, t.getType());
-        pre.setInt(3,id);
+        pre.setInt(2,id);
         if (pre.executeUpdate() != 0)
             return true;
         return false;
@@ -83,12 +78,12 @@ public class ServiceCommentaire implements IServise<commentaire>{
                int id=rs.getInt(1);
                ServiceUser user_ser= new ServiceUser();
                int user_id = rs.getInt(2);
-               user u =user_ser.getuser_id(user_id);
-               ServiceAnnonce annonce_ser= new ServiceAnnonce();
+               user u =user_ser.getuser_id(user_id); 
+               String a= u.getUsername();
                int annonce_id = rs.getInt(3);
-               Annonce a = annonce_ser.getannonce_id(annonce_id);
                String commentaire = rs.getString(4);
-               commentaire p=new commentaire(id,u,a,commentaire);
+               commentaire p=new commentaire(id,commentaire,a);
+               
      arr.add(p);
      }
     return arr;

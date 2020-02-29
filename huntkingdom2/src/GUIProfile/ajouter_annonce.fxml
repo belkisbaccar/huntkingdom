@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="parent" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIProfile.Ajouter_annonceController">
+   <children>
+      <TextField fx:id="annonce" layoutX="42.0" layoutY="46.0" prefHeight="69.0" prefWidth="516.0" promptText="ecrivez votre annonce.........." />
+      <Button fx:id="photo" layoutX="159.0" layoutY="145.0" mnemonicParsing="false" onAction="#import_image" text="ajouter image" />
+      <ImageView fx:id="imageview" fitHeight="96.0" fitWidth="145.0" layoutX="289.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="ajouter" layoutX="281.0" layoutY="276.0" mnemonicParsing="false" onAction="#ajouter" text="Post" />
+   </children>
+</AnchorPane>

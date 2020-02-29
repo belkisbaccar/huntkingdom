@@ -22,7 +22,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="100.0" style="-fx-background-color: #ffd59a;">
                      <children>
-                        <Button layoutX="928.0" layoutY="655.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="178.0" text="retour" />
+                        <Button fx:id="retour" layoutX="928.0" layoutY="655.0" mnemonicParsing="false" onAction="#retour" prefHeight="25.0" prefWidth="178.0" text="retour" />
                         <TableView fx:id="table_id" layoutX="111.0" layoutY="50.0" prefHeight="555.0" prefWidth="1031.0">
                           <columns>
                             <TableColumn fx:id="reclamation_id" prefWidth="111.0" text="id_reclamation" />
@@ -48,8 +48,8 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ffd59a;">
                      <children>
-                        <PieChart fx:id="Pie_chart" layoutX="33.0" layoutY="21.0" prefHeight="513.0" prefWidth="451.0" title="Diagramme circulaires des réclamations" />
-                        <LineChart fx:id="linechart" layoutX="497.0" layoutY="65.0" prefHeight="391.0" prefWidth="426.0" title=" diagramme de dispersion des réclamations">
+                        <PieChart fx:id="Pie_chart" layoutX="77.0" layoutY="117.0" prefHeight="501.0" prefWidth="546.0" title="Diagramme circulaires des réclamations" />
+                        <LineChart fx:id="linechart" layoutX="656.0" layoutY="117.0" prefHeight="501.0" prefWidth="558.0" title=" diagramme de dispersion des réclamations">
                           <xAxis>
                             <CategoryAxis fx:id="X" side="BOTTOM" />
                           </xAxis>
@@ -57,6 +57,7 @@
                             <NumberAxis fx:id="Y" side="LEFT" />
                           </yAxis>
                         </LineChart>
+                        <Button fx:id="retour1" layoutX="973.0" layoutY="673.0" mnemonicParsing="false" onAction="#retour1" prefHeight="25.0" prefWidth="178.0" text="retour" />
                      </children>
                   </AnchorPane>
               </content>

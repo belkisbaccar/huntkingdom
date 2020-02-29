@@ -40,6 +40,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import user.Service.UserSession;
 
 /**
  * FXML Controller class
@@ -80,12 +81,15 @@ public class EventsController implements Initializable {
     }
         private Statement ste;
     private PreparedStatement pre;
+    String s1="";
  
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        UserSession n = UserSession.getInstance();
+                                s1 = n.getUserName();
         try {
             eventcontainer.setSpacing(5);
             display_events();
@@ -120,7 +124,7 @@ public class EventsController implements Initializable {
 
     @FXML
     private void page_profile(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Profile.fxml"));
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIProfile/Welcome.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -152,7 +156,7 @@ public class EventsController implements Initializable {
 
     @FXML
     private void page_complains(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("Complains.fxml"));
+                               FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIR/afficher_complaint.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -179,15 +183,15 @@ public class EventsController implements Initializable {
                va.setFitHeight(200);
         va.setFitWidth(743);
               Button bt1=new Button("participer");
-              Button bt2=new Button("reclamer");
-              participation pp= new participation(new user("user"),e.getId_event());
+             
+              participation pp= new participation(new user(s1),e.getId_event());
               if(pa.chercher_ajout_participation(pp)){
                   bt1.setDisable(true);
               }
               HBox h= new HBox();
               h.setSpacing(10);
               h.setAlignment(Pos.CENTER);
-              h.getChildren().addAll(bt1,bt2);
+              h.getChildren().addAll(bt1);
                VBox v1=new VBox();
                v1.setAlignment(Pos.CENTER);
                v1.setSpacing(10);

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1264.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUIProfile.Back_adminController">
+   <children>
+      <ImageView fx:id="imageview" fitHeight="170.0" fitWidth="235.0" layoutX="73.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="346.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+         <font>
+            <Font name="System Bold Italic" size="45.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nom" layoutX="565.0" layoutY="50.0" style="-fx-background-color: transparent;">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </TextField>
+      <Button fx:id="sign_out" layoutX="1137.0" layoutY="23.0" mnemonicParsing="false" onAction="#sign_out" text="sign out">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="aff" layoutX="575.0" layoutY="559.0" mnemonicParsing="false" onAction="#aff" text="Gerer les utilisateurs">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="traiter" layoutX="389.0" layoutY="379.0" mnemonicParsing="false" onAction="#traiter" text="Traiter les demande d'ajout administrateur">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="anonce" layoutX="554.0" layoutY="475.0" mnemonicParsing="false" onAction="#anonce" text="Controler les annonces">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="stat" layoutX="644.0" layoutY="654.0" mnemonicParsing="false" onAction="#stat" text="Statistique">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

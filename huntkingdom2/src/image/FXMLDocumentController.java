@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package image;
+import GUIR.Reclamer_produitController;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
@@ -29,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -44,8 +46,12 @@ import javafx.util.Callback;
 import javafx.scene.control.TableColumn.CellEditEvent ;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import reclamation.Service.Produit_Sessions;
 import user.Service.UserSession;
+
 
 /**
  *
@@ -167,6 +173,11 @@ public class FXMLDocumentController implements Initializable {
                    
         try {
             addButtonToTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            addButtonToTable3();
         } catch (SQLException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -321,13 +332,72 @@ public int get() throws SQLException
 
         table.getColumns().add(actionCol1);
       }
+          private void addButtonToTable3() throws SQLException {
+        TableColumn colBtn = new TableColumn("Action");
+        colBtn.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
+        Callback<TableColumn<Produitentity, Void>, TableCell<Produitentity, Void>> cellFactory = new Callback<TableColumn<Produitentity, Void>, TableCell<Produitentity, Void>>() {
+            @Override
+            public TableCell<Produitentity, Void> call(final TableColumn<Produitentity, Void> param) {
+                final TableCell<Produitentity, Void> cell = new TableCell<Produitentity, Void>() {
+
+                    private final Button btn = new Button("reclamer");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Produitentity data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data);
+                            try {
+//                                Stage stage1 = (Stage) btn.getScene().getWindow();
+//        stage1.close();
+                                
+                                Produit_Sessions.getInstace(data.getId());  
+              
+                FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIR/reclamer_produit.fxml"));
+        
+        Parent root=fxml.load();
+        scroll.getScene().setRoot(root);
+                  
+                                
+                            } catch (Exception exc) {
+                            }
+
+                        });
+                       
+                    }
+
+                    @Override
+
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+//                            try {
+//                                update();
+//                            } catch (SQLException ex) {
+//                                Logger.getLogger(Afficher_complaintController.class.getName()).log(Level.SEVERE, null, ex);
+//                            }
+                        }
+                    }
+                };
+                return cell;
+            } 
+
+        };
+
+        colBtn.setCellFactory(cellFactory);
+
+        table.getColumns().add(colBtn);
+        
+ 
+    }
 
     @FXML
     private void commander(ActionEvent event) throws SQLException {
-       /* int i = get();
+        int i = get();
         k.commande(i);
-        k.pdf(i);*/
-        System.out.println("q");
+        k.pdf(i);
     }
 
    @FXML
@@ -341,7 +411,7 @@ public int get() throws SQLException
 
     @FXML
     private void page_profile(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/Profile.fxml"));
+                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIProfile/Welcome.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -373,7 +443,7 @@ public int get() throws SQLException
 
     @FXML
     private void page_complains(ActionEvent event) throws IOException {
-                   FXMLLoader fxml=new FXMLLoader(getClass().getResource("/MenuGUI/Complains.fxml"));
+                       FXMLLoader fxml=new FXMLLoader(getClass().getResource("/GUIR/afficher_complaint.fxml"));
         
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
@@ -386,4 +456,5 @@ public int get() throws SQLException
         Parent root=fxml.load();
         menu.getScene().setRoot(root);
     }
+
                 }

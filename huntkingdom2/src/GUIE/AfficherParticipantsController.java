@@ -7,7 +7,7 @@ package GUIE;
 
 import evenement.Service.evenementService;
 import evenement.Service.participationService;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+//import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import evenement.Entity.evenement;
 import evenement.Entity.participation;
 import java.io.IOException;

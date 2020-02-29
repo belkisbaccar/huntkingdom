@@ -7,6 +7,9 @@ package image;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import connection.Datasource;
 import java.sql.ResultSet;
@@ -22,6 +25,7 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import user.Service.UserSession;
  
 
 /**
@@ -33,6 +37,25 @@ public class panierController {
     private Statement st;
     private PreparedStatement pst;
     private ResultSet s;
+    
+    
+    public int get() throws SQLException
+{
+    int i2=0;
+      UserSession n = UserSession.getInstance();
+                               String s1 = n.getUserName();
+                               Statement stmt1 = cnx.createStatement();
+                              String SQL1 = "SELECT * FROM user  WHERE username ='" +s1+"'";
+                               ResultSet rs1 = stmt1.executeQuery(SQL1);
+                               while(rs1.next())
+                                {
+                                    i2=rs1.getInt(1);
+                                           
+                                }
+        return i2;
+                              
+    
+}
     
      public void insert(int id_user ,String nom) throws SQLException
     {
@@ -151,9 +174,9 @@ cnx = Datasource.getInstance().getCnx();
   
         return sb.toString(); 
     }
-     void pdf(int id_user)
+          void pdf(int id_user) throws SQLException
      {
- 
+ int i= get();
 try {
 
          OutputStream file = new FileOutputStream(new File("D:\\Test.pdf"));
@@ -166,16 +189,26 @@ try {
 
 
             document.open();
+             document.add(new Paragraph("numero commande "+getAlphaNumericString(10)));
+              document.add(new Paragraph("BIENVENU"));
 
-            document.add(new Paragraph("numero commande "+getAlphaNumericString(4)));
-              //document.add(new Paragraph(getprix(4)));
+             PdfPTable my_first_table = new PdfPTable(3);
+             PdfPCell table_cell;
+             table_cell=new PdfPCell(new Phrase(getprix(i)));
+              my_first_table.addCell(table_cell);
+              table_cell=new PdfPCell(new Phrase(getquantite(i)));
+               my_first_table.addCell(table_cell);
+               table_cell=new PdfPCell(new Phrase(getUser(i)));
+                my_first_table.addCell(table_cell);
+           
+             // my_first_table.addCell(table_cell);
               // document.add(new Paragraph(getquantite(4)));
 
-           
+           document.add( my_first_table);    
 
 
             document.close();
-
+             
             file.close();
 
 
@@ -206,9 +239,23 @@ try {
      public  String getquantite(int id_user) throws SQLException
     {
         String x="";
-        String x2="";
         Statement stmt = cnx.createStatement();
         String SQL2 = "SELECT quantite FROM commande WHERE id ='"+id_user+"'";
+          ResultSet rs2 = stmt.executeQuery(SQL2);
+          
+          if(rs2.next())
+          {
+              x = rs2.getString(1);
+             
+    }
+          return (x);   
+          
+}
+      public  String  getUser(int id_user) throws SQLException
+    {
+        String x="";
+        Statement stmt = cnx.createStatement();
+        String SQL2 = "SELECT nom FROM user WHERE id_user ='"+id_user+"'";
           ResultSet rs2 = stmt.executeQuery(SQL2);
           
           if(rs2.next())

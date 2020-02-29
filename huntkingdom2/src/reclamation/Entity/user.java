@@ -21,6 +21,14 @@ public class user {
     private String role;
     private String username;
 
+    public user(int id_user) {
+        this.id_user = id_user;
+    }
+
+  
+
+    
+    
     public user(int id_user, String nom, String prenom, int age, String sexe, String mot_de_passe, String photo, String role , String username) {
         this.id_user = id_user;
         this.nom = nom;
