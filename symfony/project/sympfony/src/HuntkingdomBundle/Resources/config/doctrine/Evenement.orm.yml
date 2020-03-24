@@ -1,0 +1,42 @@
+HuntkingdomBundle\Entity\Evenement:
+    type: entity
+    table: evenement
+    id:
+        idEvent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_event
+            generator:
+                strategy: IDENTITY
+    fields:
+        titreEvent:
+            type: string
+            nullable: false
+            length: 50
+            options:
+                fixed: false
+            column: titre_event
+        image:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        dateDebutEvent:
+            type: date
+            nullable: false
+            column: date_debut_event
+        dateFinEvent:
+            type: date
+            nullable: false
+            column: date_fin_event
+        nbPlaceEvent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: nb_place_event
+    lifecycleCallbacks: {  }

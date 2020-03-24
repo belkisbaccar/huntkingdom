@@ -1,0 +1,49 @@
+HuntkingdomBundle\Entity\Commentaire:
+    type: entity
+    table: commentaire
+    indexes:
+        id_user:
+            columns:
+                - id_user
+        id_annonce:
+            columns:
+                - id_annonce
+    id:
+        idCommentaire:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_commentaire
+            generator:
+                strategy: IDENTITY
+    fields:
+        commentaire:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    manyToOne:
+        idUser:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+        idAnnonce:
+            targetEntity: Annonce
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_annonce:
+                    referencedColumnName: id_annonce
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

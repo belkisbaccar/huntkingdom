@@ -1,0 +1,76 @@
+{% extends 'backoffice.html.twig' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Data table</h4>
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                        <thead>
+                        <tr>
+                            <th>Id Publicite</th>
+                            <th>Nom Publicite</th>
+                            <th>Image</th>
+                            <th>Date Debut</th>
+                            <th>Date Fin</th>
+                            <th>Nom Proprietaire</th>
+                            <th>prix</th>
+
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e in Publicite %}
+                            <tr>
+
+                                <td>{{e.idPublicite}}</td>
+                                <td >{{e.nom}}</td>
+                                <td > <img src="{{ asset('imagesPub/') }}{{e.image}}" style="width: 100px ; height: 50px;"></td>
+                                <td>{{e.dateDebut|date("m/d/Y")}}</td>
+                                <td>{{e.dateFin|date("m/d/Y")}}</td>
+                                <td>{{e.nomProprietaire}}</td>
+                                <td>{{e.prix}}</td>
+                                <td>
+
+                                    <a  data-toggle="modal" data-target="#exampleModal-2" class="btn btn-inverse-primary btn-fw">Supprimer</a>
+
+                                    <div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-2" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel-2">Delete</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h1>Are you sure ?</h1>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href = "{{path ('publicite_supprimerPublicite',{'id' : e.idPublicite}) }} "  class="btn btn-gradient-primary btn-sm">Supprimer</a>
+                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <a href= "{{path ('publicite_updatePublicite',{'id' : e.idPublicite}) }} " class="btn btn-inverse-success btn-fw" >Modifier</a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        {% endblock %}
+
+

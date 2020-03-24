@@ -1,0 +1,38 @@
+HuntkingdomBundle\Entity\Participation:
+    type: entity
+    table: participation
+    indexes:
+        username:
+            columns:
+                - username
+        id_event:
+            columns:
+                - id_event
+    id:
+        idParticipation:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_participation
+            generator:
+                strategy: IDENTITY
+    fields:
+        username:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        idEvent:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_event
+        dateReservation:
+            type: date
+            nullable: false
+            column: date_reservation
+    lifecycleCallbacks: {  }

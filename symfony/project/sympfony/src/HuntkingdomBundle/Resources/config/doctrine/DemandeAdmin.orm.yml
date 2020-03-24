@@ -1,0 +1,43 @@
+HuntkingdomBundle\Entity\DemandeAdmin:
+    type: entity
+    table: demande_admin
+    indexes:
+        id_user:
+            columns:
+                - id_user
+        nom:
+            columns:
+                - nom
+        prenom:
+            columns:
+                - prenom
+    id:
+        idDemande:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_demande
+            generator:
+                strategy: IDENTITY
+    fields:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_user
+        nom:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        prenom:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

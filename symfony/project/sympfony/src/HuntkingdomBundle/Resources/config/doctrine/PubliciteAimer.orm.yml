@@ -1,0 +1,37 @@
+HuntkingdomBundle\Entity\PubliciteAimer:
+    type: entity
+    table: publicite_aimer
+    indexes:
+        id_publicite:
+            columns:
+                - id_publicite
+        id_user:
+            columns:
+                - id_user
+    id:
+        idPubAimer:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_pub_aimer
+            generator:
+                strategy: IDENTITY
+    fields:
+        idPublicite:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_publicite
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_user
+        date:
+            type: date
+            nullable: false
+    lifecycleCallbacks: {  }

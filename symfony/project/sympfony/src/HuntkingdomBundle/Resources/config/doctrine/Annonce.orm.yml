@@ -1,0 +1,52 @@
+HuntkingdomBundle\Entity\Annonce:
+    type: entity
+    table: annonce
+    indexes:
+        user_id:
+            columns:
+                - user_id
+    id:
+        idAnnonce:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_annonce
+            generator:
+                strategy: IDENTITY
+    fields:
+        text:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        image:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        aime:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+        etat:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        user:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id_user
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

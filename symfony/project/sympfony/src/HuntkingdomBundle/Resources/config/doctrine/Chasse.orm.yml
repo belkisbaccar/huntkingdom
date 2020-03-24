@@ -1,0 +1,64 @@
+HuntkingdomBundle\Entity\Chasse:
+    type: entity
+    table: chasse
+    indexes:
+        idp:
+            columns:
+                - idp
+        id_user:
+            columns:
+                - id_user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        animal:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        region:
+            type: string
+            nullable: false
+            length: 20
+            options:
+                fixed: false
+        dateDebut:
+            type: date
+            nullable: false
+            column: date_debut
+        dateFin:
+            type: date
+            nullable: false
+            column: date_fin
+        type:
+            type: string
+            nullable: false
+            length: null
+            options:
+                fixed: false
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: id_user
+    manyToOne:
+        idp:
+            targetEntity: Product
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idp:
+                    referencedColumnName: ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

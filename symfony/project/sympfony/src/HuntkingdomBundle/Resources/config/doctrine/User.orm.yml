@@ -1,0 +1,78 @@
+HuntkingdomBundle\Entity\User:
+    type: entity
+    table: user
+    uniqueConstraints:
+        username:
+            columns:
+                - username
+    id:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: id_user
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        prenom:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        age:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        sexe:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        motDePasse:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+            column: mot_de_passe
+        photo:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        role:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        username:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        telephone:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+        email:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

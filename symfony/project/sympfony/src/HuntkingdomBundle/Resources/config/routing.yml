@@ -1,0 +1,36 @@
+huntkingdom_homepage:
+    path:     /
+    defaults: { _controller: HuntkingdomBundle:Default:index }
+commerce_ajoutProduit:
+    path:     /ajouterProduit
+    defaults: { _controller: HuntkingdomBundle:produit:ajouterProduit}
+
+commerce_afficherProduit:
+    path:     /afficherProduit
+    defaults: { _controller: HuntkingdomBundle:produit:afficherProduit}
+
+commerce_supprimerProduit:
+    path:     /supprimer/{id}
+    defaults: { _controller: HuntkingdomBundle:produit:supprimerProduit}
+
+commerce_modifierProduit:
+    path:     /updateP/{id}
+    defaults: { _controller: HuntkingdomBundle:produit:updateProduit}
+
+
+publicite_ajoutPublicite:
+    path:    /ajouterPublicite
+    defaults: { _controller: HuntkingdomBundle:publicite:ajouterPublicite}
+
+publicite_afficherPublicite:
+   path:     /afficherPublicite
+   defaults: { _controller: HuntkingdomBundle:publicite:afficherPublicite}
+
+publicite_supprimerPublicite:
+  path:     /supprimerpub/{id}
+  defaults: { _controller: HuntkingdomBundle:publicite:supprimerPublicite}
+
+publicite_updatePublicite:
+  path:     /update/{id}
+  defaults: { _controller: HuntkingdomBundle:publicite:updatePublicite }
+
